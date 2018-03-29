@@ -1,11 +1,8 @@
-FROM debian:stretch
+FROM ubuntu:16.04
 MAINTAINER Niko Lehtovirta
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
-
-# Set timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # Create a default user
 RUN useradd automation --shell /bin/bash --create-home
@@ -18,7 +15,7 @@ RUN useradd automation --shell /bin/bash --create-home
 RUN apt-get -yqq update && \
     apt-get -yqq install xvfb tinywm && \
     apt-get -yqq install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic && \
-    apt-get -yqq install supervisor chromium chromedriver && \
+    apt-get -yqq install supervisor chromium-browser chromium-chromedriver && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure Supervisor
